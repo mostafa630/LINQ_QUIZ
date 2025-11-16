@@ -5,6 +5,16 @@ namespace LINQ_QUIZ.DataBase
 {
     internal static class UserSource
     {
+        public static readonly User Ethan = new User(
+           id: 5,
+           name: "Ethan",
+           age: 40,
+           country: "Germany",
+           department: Department.IT,
+           initialSalary: 15000M,
+           manager: null
+       );
+
         private static readonly User Hesham = new User(
             id: 22,
             name: "Hesham",
@@ -12,7 +22,7 @@ namespace LINQ_QUIZ.DataBase
             country: "USA",
             department: Department.IT,
             initialSalary: 7000M,
-            manager: null
+            manager: Ethan
         );
 
         public static readonly User Alice = new User(
@@ -22,8 +32,9 @@ namespace LINQ_QUIZ.DataBase
             country: "USA",
             department: Department.IT,
             initialSalary: 10000M,
-            manager: Hesham
+            manager: Ethan
         );
+
 
         public static readonly User Bob = new User(
             id: 2,
@@ -31,7 +42,7 @@ namespace LINQ_QUIZ.DataBase
             age: 25,
             country: "UK",
             department: Department.SERVICE_GROUP,
-            initialSalary: 9000M,
+            initialSalary: 15000M,
             manager: null
         );
 
@@ -55,15 +66,7 @@ namespace LINQ_QUIZ.DataBase
             manager: null
         );
 
-        public static readonly User Ethan = new User(
-            id: 5,
-            name: "Ethan",
-            age: 40,
-            country: "Germany",
-            department: Department.IT,
-            initialSalary: 15000M,
-            manager: null
-        );
+
 
         private static readonly List<User> Users = new()
         {

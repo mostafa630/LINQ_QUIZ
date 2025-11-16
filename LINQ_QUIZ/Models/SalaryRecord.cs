@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LINQ_QUIZ.Models.Enums;
+﻿using LINQ_QUIZ.Enums;
 
 namespace LINQ_QUIZ.Models
 {
     internal class SalaryRecord
     {
-        public decimal Amount { get;private set; }
-        public int Month { get;private set; }
-        public SalaryRecord(decimal amount, int month)
+        public decimal Amount { get; private set; }
+        public Month Month { get; private set; }
+        public SalaryRecord(decimal amount, Month month)
         {
             Amount = amount;
             Month = month;
         }
+
     }
 }

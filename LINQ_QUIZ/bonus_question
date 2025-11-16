@@ -1,0 +1,11 @@
+Ithink if we use Enums  that will enofrce us to create 
+and object from th Department Class and Make the Department
+assigned to one of the Enum varients 
+but that make it possible to create more than on instance that have the same Depatment varient so using that : 
+public readonly static Department IT = new(1, "IT");
+
+will "enforce one single instance for IT department"  // Importatn
+
+// Important
+so That enabel us to make a "one instance for each department"
+and we can use it in all places in our app  and that will keep our state valid and protected 

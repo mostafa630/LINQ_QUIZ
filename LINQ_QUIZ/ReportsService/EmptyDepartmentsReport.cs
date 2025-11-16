@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LINQ_QUIZ.DataBase;
+﻿using LINQ_QUIZ.DataBase;
 using LINQ_QUIZ.Models;
 
 namespace LINQ_QUIZ.ReportsService
@@ -14,7 +9,17 @@ namespace LINQ_QUIZ.ReportsService
         {
             IEnumerable<User> users = UserSource.GetAllUsers();
 
-            // Implement the logic to get the list of empty departments
+            var departments = users
+                .Select(u => u.Department?.Name)
+                .Distinct();
+
+            var allDeptsNames = Department.GetAllDeptsNames();
+
+            var emptyDeptsNames = allDeptsNames
+                                 .Where(name => !departments.Contains(name));
+
+            return emptyDeptsNames
+                  .Select(deptName => Department.GetDeptByName(deptName));
         }
     }
 }

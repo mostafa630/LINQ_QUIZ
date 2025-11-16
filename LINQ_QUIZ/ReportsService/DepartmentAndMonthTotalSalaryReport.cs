@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LINQ_QUIZ.Enums;
 
 namespace LINQ_QUIZ.ReportsService
 {
@@ -11,14 +7,43 @@ namespace LINQ_QUIZ.ReportsService
         public IEnumerable<DepartmentAndMonthTotalSalary> GenerateDepartmentAndMonthTotalSalaryReport()
         {
             var users = DataBase.UserSource.GetAllUsers();
-            // Implement the logic to generate the department and month total salary report
+
+            var UsersSalariesAndDepartments = users.
+            SelectMany(u => u.SalaryRecord.Select(r => new
+            {
+                Department = u.Department,
+                Month = r.Month,
+                Salary = r.Amount
+            }));
+
+            var groups = UsersSalariesAndDepartments
+            .GroupBy(g => new
+            {
+                g.Department,
+                g.Month
+            });
+
+            var report = groups
+            .Select(g => new DepartmentAndMonthTotalSalary
+            {
+                DepartmentName = g.Key.Department.Name,
+                Month = g.Key.Month,
+                TotalSalary = g.Sum(r => r.Salary)
+            });
+
+            return report;
         }
     }
 
     public class DepartmentAndMonthTotalSalary
     {
         public string DepartmentName { get; set; }
-        public int Month { get; set; }
+        public Month Month { get; set; }
         public decimal TotalSalary { get; set; }
+
+        public override string ToString()
+        {
+            return $"{DepartmentName} - {Month.ToString()} - {TotalSalary}";
+        }
     }
 }
